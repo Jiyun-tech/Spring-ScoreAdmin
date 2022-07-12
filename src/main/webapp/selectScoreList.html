@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Update/Delete Student</title>
+</head>
+<body>
+	<div class="title">학생 조회 후 정정/삭제</div>
+	<br>
+	<br>
+
+	<div class="container">
+
+		<form method="get">
+			<table class="button">
+				<tr>
+					<td align="right">
+						<input type="submit" value="조회" formaction="/viewScoreList"/>
+					</td>
+				</tr>
+			</table>
+			<table class="content_table">
+				<tr>
+					<td class="input_category" width="100" align="center">이름</td>
+					<td class="input_content" width="300" align="center"><input
+						type="text" name="name" id="name" maxlength="20"
+						onsubmit="characterCheck(this)" onkeyup="characterCheck(this)"
+						onkeydown="characterCheck(this)"></td>
+				</tr>
+				<tr>
+					<td class="input_category" align="center">학번</td>
+					<td class="input_content" align="center" name="studentid1"><input
+						type="number" name="studentid" id="studentid" min="209901" max="999999"
+						onsubmit="idCheck(this)" onkeyup="cidCheck(this)"
+						onkeydown="idCheck(this)"></td>
+				</tr>
+			</table>
+			<br>
+			<table class="notice_table">
+				<tr>
+					<td>* 이름, 학번 중 최소 한 가지 정보 입력 필수</td>
+				</tr>
+				<tr>
+					<td>* 이름 : 최대 20자</td>
+				</tr>
+				<tr>
+					<td>* 학번 : 숫자만 입력</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<script>
+		function characterCheck(obj) {
+			let reg = /[\{\}\[\]\/?.,;:|\-_+<>@\#$%&\'\"\\\()\=`~!^*123456789\s]/gi;
+			if (reg.test(obj.value)) {
+				alert("특수 문자나 숫자, 띄어쓰기는 입력하실 수 없습니다.");
+				obj.value = obj.value.substring(0, 0);
+			}
+		}
+		
+		function idCheck(obj) {
+			let reg = /[\{\}\[\]\/?.,;:|\-_+<>@\#$%&\'\"\\\()\=`~!^*\s]/gi;
+			if (reg.test(obj.value)) {
+				alert("특수 문자나 띄어쓰기는 입력하실 수 없습니다.");
+				obj.value = obj.value.substring(0, 0);
+			}
+		}
+
+		window.onload = function() {
+			document
+					.querySelector('form')
+					.addEventListener(
+							'submit',
+							function(e) {
+								if (document.getElementById('name').value == '' 
+										&& document.getElementById('studentid').value == '') {
+									e.preventDefault()//이름 미입력을 방지
+									alert('이름, 학번 중 최소 한 가지 입력 필수')
+								} 
+							});
+		}
+	</script>
+	<style>
+		body {
+			background-color: #E5CCFF;
+			color: black;
+			font-weight: bold;
+			margin: auto;
+			padding-top: 2%;
+			padding-bottom: 3%;
+		}
+		
+		.title {
+			font-size: 30pt;
+			text-align: center;
+		}
+		
+		.small_title {
+			font-size: 20pt;
+			text-align: center;
+		}
+		
+		.input_category {
+			width: 100;
+			border: 1px solid black;
+		}
+		
+		.input_content {
+			width: 200;
+			border: 1px solid black;
+		}
+		
+		.container {
+			item-align: center;
+		}
+		
+		.button {
+			width: 40%;
+			margin: auto;
+			text-align: center;
+		}
+		
+		.content_table {
+			border-spacing: 0;
+			width: 40%;
+			border: 1px solid black;
+			margin: auto;
+			text-align: center;
+		}
+		
+		.notice_table {
+			border-spacing: 0;
+			width: 40%;
+			border: 0px solid black;
+			margin: auto;
+		}
+	</style>
+
+</body>
+</html>
